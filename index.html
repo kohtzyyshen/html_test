@@ -145,7 +145,7 @@
 
         exportButton.addEventListener('click', function() {
     html2canvas(announcement, {
-        scale: 0.75 // 将尺寸缩小一半
+        scale: 1 
     }).then(canvas => {
         const link = document.createElement('a');
         link.download = 'announcement.png';
