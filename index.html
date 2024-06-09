@@ -14,7 +14,7 @@
             max-width: 600px;
             margin: 0 auto;
         }
-        .text-field, .button, .description, .font-size-input, .vertical-gap-input {
+        .text-field, .button, .description, .font-size-input, .padding-input {
             display: block;
             width: 100%;
             margin-bottom: 20px;
@@ -71,8 +71,17 @@
         <label class="description">Set the font size for the content (default 24):</label>
         <input type="number" id="contentFontSize" class="font-size-input" placeholder="Content Font Size" value="24">
 
-        <label class="description">Set the vertical gap between title and content:</label>
-        <input type="number" id="verticalGap" class="vertical-gap-input" placeholder="Vertical Gap" value="20">
+        <label class="description">Padding Top (default 71):</label>
+        <input type="number" id="paddingTop" class="padding-input" value="71">
+
+        <label class="description">Padding Bottom (default 71):</label>
+        <input type="number" id="paddingBottom" class="padding-input" value="71">
+
+        <label class="description">Padding Left (default 112):</label>
+        <input type="number" id="paddingLeft" class="padding-input" value="112">
+
+        <label class="description">Padding Right (default 112):</label>
+        <input type="number" id="paddingRight" class="padding-input" value="112">
         
         <button id="exportButton" class="button">Export as PNG</button>
     </div>
@@ -91,7 +100,10 @@
         const announcementContent = document.getElementById('announcementContent');
         const titleFontSizeInput = document.getElementById('titleFontSize');
         const contentFontSizeInput = document.getElementById('contentFontSize');
-        const verticalGapInput = document.getElementById('verticalGap');
+        const paddingTopInput = document.getElementById('paddingTop');
+        const paddingBottomInput = document.getElementById('paddingBottom');
+        const paddingLeftInput = document.getElementById('paddingLeft');
+        const paddingRightInput = document.getElementById('paddingRight');
 
         titleInput.addEventListener('input', function() {
             announcementTitle.textContent = titleInput.value;
@@ -111,9 +123,24 @@
             announcementContent.style.fontSize = contentFontSize;
         });
 
-        verticalGapInput.addEventListener('input', function() {
-            const verticalGap = verticalGapInput.value + 'px';
-            announcementContent.style.marginTop = verticalGap;
+        paddingTopInput.addEventListener('input', function() {
+            const paddingTop = paddingTopInput.value + 'px';
+            announcement.style.paddingTop = paddingTop;
+        });
+
+        paddingBottomInput.addEventListener('input', function() {
+            const paddingBottom = paddingBottomInput.value + 'px';
+            announcement.style.paddingBottom = paddingBottom;
+        });
+
+        paddingLeftInput.addEventListener('input', function() {
+            const paddingLeft = paddingLeftInput.value + 'px';
+            announcement.style.paddingLeft = paddingLeft;
+        });
+
+        paddingRightInput.addEventListener('input', function() {
+            const paddingRight = paddingRightInput.value + 'px';
+            announcement.style.paddingRight = paddingRight;
         });
 
         exportButton.addEventListener('click', function() {
