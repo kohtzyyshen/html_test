@@ -71,6 +71,10 @@
         <label class="description">Set the font size for the content (default 24):</label>
         <input type="number" id="contentFontSize" class="font-size-input" placeholder="Content Font Size" value="24">
 
+        <label class="description">Vertical Gap between Title and Content (in pixels):</label>
+<input type="number" id="verticalGap" class="padding-input" value="50">
+
+
         <label class="description">Padding Top (default 71):</label>
         <input type="number" id="paddingTop" class="padding-input" value="71">
 
@@ -100,6 +104,7 @@
         const announcementContent = document.getElementById('announcementContent');
         const titleFontSizeInput = document.getElementById('titleFontSize');
         const contentFontSizeInput = document.getElementById('contentFontSize');
+        const verticalGapInput = document.getElementById('verticalGap');
         const paddingTopInput = document.getElementById('paddingTop');
         const paddingBottomInput = document.getElementById('paddingBottom');
         const paddingLeftInput = document.getElementById('paddingLeft');
@@ -122,6 +127,12 @@
             const contentFontSize = contentFontSizeInput.value + 'px';
             announcementContent.style.fontSize = contentFontSize;
         });
+
+verticalGapInput.addEventListener('input', function() {
+    const verticalGap = verticalGapInput.value + 'px';
+    announcementTitle.style.marginBottom = verticalGap;
+});
+
 
         paddingTopInput.addEventListener('input', function() {
             const paddingTop = paddingTopInput.value + 'px';
