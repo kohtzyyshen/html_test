@@ -14,7 +14,7 @@
             max-width: 600px;
             margin: 0 auto;
         }
-        .text-field, .button, .description, .font-size-input {
+        .text-field, .button, .description, .font-size-input, .vertical-gap-input {
             display: block;
             width: 100%;
             margin-bottom: 20px;
@@ -70,6 +70,9 @@
         <input type="number" id="titleFontSize" class="font-size-input" placeholder="Title Font Size" value="64">
         <label class="description">Set the font size for the content (default 24):</label>
         <input type="number" id="contentFontSize" class="font-size-input" placeholder="Content Font Size" value="24">
+
+        <label class="description">Set the vertical gap between title and content:</label>
+        <input type="number" id="verticalGap" class="vertical-gap-input" placeholder="Vertical Gap" value="20">
         
         <button id="exportButton" class="button">Export as PNG</button>
     </div>
@@ -88,6 +91,7 @@
         const announcementContent = document.getElementById('announcementContent');
         const titleFontSizeInput = document.getElementById('titleFontSize');
         const contentFontSizeInput = document.getElementById('contentFontSize');
+        const verticalGapInput = document.getElementById('verticalGap');
 
         titleInput.addEventListener('input', function() {
             announcementTitle.textContent = titleInput.value;
@@ -105,6 +109,11 @@
         contentFontSizeInput.addEventListener('input', function() {
             const contentFontSize = contentFontSizeInput.value + 'px';
             announcementContent.style.fontSize = contentFontSize;
+        });
+
+        verticalGapInput.addEventListener('input', function() {
+            const verticalGap = verticalGapInput.value + 'px';
+            announcementContent.style.marginTop = verticalGap;
         });
 
         exportButton.addEventListener('click', function() {
