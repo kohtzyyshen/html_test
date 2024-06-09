@@ -104,61 +104,55 @@
         const paddingBottomInput = document.getElementById('paddingBottom');
         const paddingLeftInput = document.getElementById('paddingLeft');
         const paddingRightInput = document.getElementById('paddingRight');
-    
+
         titleInput.addEventListener('input', function() {
             announcementTitle.textContent = titleInput.value;
         });
-    
+
         contentInput.addEventListener('input', function() {
             announcementContent.textContent = contentInput.value;
         });
-    
+
         titleFontSizeInput.addEventListener('input', function() {
             const titleFontSize = titleFontSizeInput.value + 'px';
             announcementTitle.style.fontSize = titleFontSize;
         });
-    
+
         contentFontSizeInput.addEventListener('input', function() {
             const contentFontSize = contentFontSizeInput.value + 'px';
             announcementContent.style.fontSize = contentFontSize;
         });
-    
+
         paddingTopInput.addEventListener('input', function() {
             const paddingTop = paddingTopInput.value + 'px';
             announcement.style.paddingTop = paddingTop;
         });
-    
+
         paddingBottomInput.addEventListener('input', function() {
             const paddingBottom = paddingBottomInput.value + 'px';
             announcement.style.paddingBottom = paddingBottom;
         });
-    
+
         paddingLeftInput.addEventListener('input', function() {
             const paddingLeft = paddingLeftInput.value + 'px';
             announcement.style.paddingLeft = paddingLeft;
         });
-    
+
         paddingRightInput.addEventListener('input', function() {
             const paddingRight = paddingRightInput.value + 'px';
             announcement.style.paddingRight = paddingRight;
         });
-    
+
         exportButton.addEventListener('click', function() {
-            // 设置html2canvas配置项，指定画布大小为1800x600
-            const options = {
-                width: 1800,
-                height: 600
-            };
-    
-            // 使用html2canvas将announcement元素转换为画布
-            html2canvas(announcement, options).then(canvas => {
-                // 创建一个链接，下载画布上的内容
-                const link = document.createElement('a');
-                link.download = 'announcement.png';
-                link.href = canvas.toDataURL('image/png');
-                link.click();
-            });
-        });
+    html2canvas(announcement, {
+        scale: 0.5 // 将尺寸缩小一半
+    }).then(canvas => {
+        const link = document.createElement('a');
+        link.download = 'announcement.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+    });
+});
     </script>
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.3.3/dist/html2canvas.min.js"></script>
 </body>
