@@ -1,55 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Announcement Exporter</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         body {
             font-family: 'Nunito Sans', Arial, sans-serif;
             padding: 20px;
         }
-
         .wtitle {
             font-size: 40px;
             margin-bottom: 15px;
         }
-
         .container {
             max-width: 600px;
             margin-left: 0;
         }
-
-        .text-field,
-        .button {
+        .text-field, .button {
             display: block;
             width: 100%;
             height: 50px;
             margin-bottom: 30px;
             font-size: 16px;
         }
-
-        .font-size-input,
-        .padding-input {
+        .font-size-input, .padding-input {
             display: block;
             width: 100%;
             height: 50px;
             margin-bottom: 30px;
             font-size: 16px;
         }
-
         .description {
             font-size: 20px;
             margin-bottom: 15px;
         }
-
         ::placeholder {
             font-size: 16px;
             color: #888;
         }
-
         .announcement {
             position: relative;
             width: 1800px;
@@ -62,8 +57,9 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
+            margin: 0;
+            border: none;
         }
-
         .title {
             font-size: 64px;
             font-weight: bold;
@@ -73,7 +69,6 @@
             color: #FFA500;
             white-space: pre-wrap;
         }
-
         .content {
             font-size: 24px;
             word-wrap: break-word;
@@ -81,111 +76,37 @@
             color: white;
             white-space: pre-wrap;
         }
-
-        /* Popup Styles */
-        .popup {
-            display: none;
-            position: fixed;
-            z-index: 999;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-
-        }
-
-        .popup-content {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: left;
-            max-width: 500px;
-        }
-
-        .popup-content p {
-            font-size: 18px;
-            margin-bottom: 20px;
-
-        }
-
-        .popup-button {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .popup-button:hover {
-            background-color: #45a049;
-        }
     </style>
 </head>
-
 <body>
-    <!-- Popup -->
-    <div id="popup" class="popup">
-        <div class="popup-content">
-            <p>Welcome to the Announcement Exporter!<br>
-                To create an announcement, follow these steps:<br>
-                1. Enter the title and content of your announcement.<br>
-                2. Adjust the font sizes and padding (optional)<br>
-                3. Click "Export as PNG" to download your announcement as an image.<br>
-                <br>
-                Please adjust the current webpage's zoom level to below 65% ('Ctrl'/'Command' + '-') for a better user experience.<br>
-
-            </p>
-            <button class="popup-button" id="popupOkButton">OK</button>
-        </div>
-    </div>
-
     <div id="wtitle" class="wtitle">
         <label class="wtitle">Web</label>
     </div>
-
-
     <div class="container">
         <label class="description">Enter the title for your announcement:</label>
         <input type="text" id="titleInput" class="text-field" placeholder="Title" >
-
         <label class="description">Enter the content for your announcement:</label>
         <textarea id="contentInput" class="text-field" placeholder="Content" ></textarea>
-
         <button id="exportButton" class="button">Export as PNG</button>
-
         <label class="description">Set the font size for the title (default 64):</label>
         <input type="number" id="titleFontSize" class="font-size-input" placeholder="Title Font Size" value="64">
         <label class="description">Set the font size for the content (default 24):</label>
         <input type="number" id="contentFontSize" class="font-size-input" placeholder="Content Font Size" value="24">
-
         <label class="description">Vertical Gap between Title and Content (in pixels):</label>
         <input type="number" id="verticalGap" class="padding-input" value="37">
-
         <label class="description">Padding Top (in pixels):</label>
         <input type="number" id="paddingTop" class="padding-input" value="71">
-
         <label class="description">Padding Bottom (in pixels):</label>
         <input type="number" id="paddingBottom" class="padding-input" value="71">
-
         <label class="description">Padding Left (in pixels):</label>
         <input type="number" id="paddingLeft" class="padding-input" value="112">
-
         <label class="description">Padding Right (in pixels):</label>
         <input type="number" id="paddingRight" class="padding-input" value="112">
-
     </div>
-
     <div id="announcement" class="announcement">
         <div id="announcementTitle" class="title">Title</div>
         <div id="announcementContent" class="content">Content</div>
     </div>
-
     <script>
         const titleInput = document.getElementById('titleInput');
         const contentInput = document.getElementById('contentInput');
@@ -246,7 +167,10 @@
 
         exportButton.addEventListener('click', function () {
             html2canvas(announcement, {
-                scale: 1
+                scale: 1,
+                useCORS: true,
+                logging: true,
+                removeContainer: true
             }).then(canvas => {
                 const link = document.createElement('a');
                 link.download = 'announcement.png';
@@ -254,20 +178,7 @@
                 link.click();
             });
         });
-
-        // Popup functionality
-        const popup = document.getElementById('popup');
-        const popupOkButton = document.getElementById('popupOkButton');
-
-        window.onload = function () {
-            popup.style.display = 'flex';
-        }
-
-        popupOkButton.addEventListener('click', function () {
-            popup.style.display = 'none';
-        });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.3.3/dist/html2canvas.min.js"></script>
 </body>
-
 </html>
